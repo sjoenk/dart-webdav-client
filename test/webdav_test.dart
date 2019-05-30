@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:webdav/webdav.dart';
+import 'package:dart_webdav/webdav.dart';
 
 void main() {
   test('Get list', () async {

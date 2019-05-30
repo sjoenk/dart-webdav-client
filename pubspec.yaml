@@ -1,4 +1,4 @@
-name: webdav
+name: dart_webdav
 description: A simple webDAV client in Dart.
 version: 0.0.1
 author:
