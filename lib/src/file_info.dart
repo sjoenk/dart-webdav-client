@@ -1,4 +1,5 @@
 class FileInfo {
+  final String name;
   final String href;
   final String size;
   final String mTime;
@@ -7,6 +8,7 @@ class FileInfo {
   final String eTag;
 
   FileInfo({
+    this.name,
     this.href,
     this.size,
     this.mTime,

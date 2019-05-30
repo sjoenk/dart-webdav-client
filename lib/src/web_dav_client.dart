@@ -187,14 +187,25 @@ class WebDavClient {
 
     responses.forEach((response) {
       final elem = response.findElements('d:propstat').single.findElements('d:prop').single;
+      final href = response.findElements('d:href');
       final size = elem.findElements('d:getcontentlength');
       final mTime = elem.findElements('d:getlastmodified');
       final cTime = elem.findElements('d:creationdate');
       final contentType = elem.findElements('d:getcontenttype');
       final eTag = elem.findElements('d:getcontenttype');
+      String name;
+
+      if (href.isNotEmpty) {
+        List parts = href.single.text.split("/");
+        parts.removeWhere((part) => part.isEmpty);
+        if (parts.isNotEmpty) {
+          name = Uri.decodeFull(parts.last);
+        }
+      }
 
       FileInfo file = FileInfo(
-        href: response.findElements('d:href').single.text,
+        name: name,
+        href: href.isNotEmpty ? href.single.text : null,
         size: size.isNotEmpty ? size.single.text : null,
         mTime: mTime.isNotEmpty ? mTime.single.text : null,
         cTime: cTime.isNotEmpty ? cTime.single.text : null,
