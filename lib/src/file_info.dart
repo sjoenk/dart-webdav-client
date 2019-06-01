@@ -27,7 +27,7 @@ class FileInfo {
 
   FileInfo get parrentDirectory {
     List<String> pathParts = this.pathParts;
-    if (pathParts.length > 1) {
+    if (pathParts.isNotEmpty) {
       pathParts.removeLast();
 
       return FileInfo(
