@@ -25,13 +25,18 @@ class FileInfo {
     return pathParts;
   }
 
-  String get currentDirectory {
+  String get parrentDirectory {
     List<String> pathParts = this.pathParts;
-    if (this.isDirectory) {
-      return pathParts?.last ?? "/";
-    } else {
-      return pathParts.length > 1 ? pathParts[pathParts.length - 2] : "/";
+    return pathParts.length > 1 ? pathParts[pathParts.length - 2] : "/";
+  }
+
+  String get parrentDirectoryPath {
+    List<String> pathParts = this.pathParts;
+    if (pathParts.length > 1) {
+      pathParts.removeLast();
+      return "/" + pathParts.join("/") + "/";
     }
+    return "/";
   }
 
   bool get isDirectory => this.contentType == null;
