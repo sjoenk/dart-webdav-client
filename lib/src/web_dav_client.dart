@@ -10,6 +10,7 @@ import 'file_info.dart';
 
 class WebDavClient {
   String baseUrl;
+  String path;
 
   bool verifySsl = true;
 
@@ -21,7 +22,7 @@ class WebDavClient {
     @required String host,
     @required String username,
     @required String password,
-    String path,
+    this.path,
     String protocol = "https",
     int port,
   })  : assert(host != null),
@@ -194,9 +195,11 @@ class WebDavClient {
       final contentType = elem.findElements('d:getcontenttype');
       final eTag = elem.findElements('d:getcontenttype');
       String name;
+      String filePath;
 
       if (href.isNotEmpty) {
-        List parts = href.single.text.split("/");
+        filePath = '/' + href.single.text.replaceFirst(this.path, '');
+        List parts = filePath.split("/");
         parts.removeWhere((part) => part.isEmpty);
         if (parts.isNotEmpty) {
           name = Uri.decodeFull(parts.last);
@@ -205,6 +208,7 @@ class WebDavClient {
 
       FileInfo file = FileInfo(
         name: name,
+        path: filePath,
         href: href.isNotEmpty ? href.single.text : null,
         size: size.isNotEmpty ? size.single.text : null,
         mTime: mTime.isNotEmpty ? mTime.single.text : null,
