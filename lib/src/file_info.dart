@@ -21,13 +21,13 @@ class FileInfo {
 
   List<String> get pathParts {
     List<String> pathParts = this.path.split('/');
-    pathParts.removeWhere((part) => part.isEmpty);
+    pathParts.removeWhere((part) => part.trim().isEmpty);
     return pathParts;
   }
 
   FileInfo get parrentDirectory {
     List<String> pathParts = this.pathParts;
-    if (pathParts.isNotEmpty) {
+    if (pathParts.length > 1) {
       pathParts.removeLast();
 
       return FileInfo(
