@@ -25,6 +25,10 @@ class FileInfo {
     return pathParts;
   }
 
+  String get parrentDirectoryName {
+    return Uri.decodeFull(this.parrentDirectory);
+  }
+
   String get parrentDirectory {
     List<String> pathParts = this.pathParts;
     return pathParts.length > 1 ? pathParts[pathParts.length - 2] : "/";
