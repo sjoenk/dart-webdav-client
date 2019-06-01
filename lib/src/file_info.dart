@@ -25,22 +25,20 @@ class FileInfo {
     return pathParts;
   }
 
-  String get parrentDirectoryName {
-    return Uri.decodeFull(this.parrentDirectory);
-  }
-
-  String get parrentDirectory {
-    List<String> pathParts = this.pathParts;
-    return pathParts.length > 1 ? pathParts[pathParts.length - 2] : "/";
-  }
-
-  String get parrentDirectoryPath {
+  FileInfo get parrentDirectory {
     List<String> pathParts = this.pathParts;
     if (pathParts.length > 1) {
       pathParts.removeLast();
-      return "/" + pathParts.join("/") + "/";
+
+      return FileInfo(
+        name: Uri.decodeFull(pathParts.last),
+        path: "/" + pathParts.join("/") + "/",
+      );
     }
-    return "/";
+
+    return FileInfo(
+      path: "/",
+    );
   }
 
   bool get isDirectory => this.contentType == null;
