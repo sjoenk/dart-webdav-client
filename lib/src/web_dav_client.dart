@@ -100,7 +100,7 @@ class WebDavClient {
   }
 
   /// download [remotePath] to local file [localFilePath]
-  void download(String remotePath, String localFilePath) async {
+  Future<void> download(String remotePath, String localFilePath) async {
     HttpClientResponse response = await this._send('GET', remotePath, [200]);
     await response.pipe(new File(localFilePath).openWrite());
   }
