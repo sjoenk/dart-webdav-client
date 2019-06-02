@@ -42,7 +42,7 @@ class FileInfo {
   }
 
   bool get isDirectory => this.contentType == null;
-  bool get isImageFile => this.contentType.contains("image");
-  bool get isAudioFile => this.contentType.contains("audio");
-  bool get isVideoFile => this.contentType.contains("video");
+  bool get isImageFile => this.contentType?.contains("image");
+  bool get isAudioFile => this.contentType?.contains("audio");
+  bool get isVideoFile => this.contentType?.contains("video");
 }
