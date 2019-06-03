@@ -198,9 +198,10 @@ class WebDavClient {
       String filePath;
 
       if (href.isNotEmpty) {
-        filePath = '/' + href.single.text.replaceFirst(this.path, '');
+        filePath = href.single.text.replaceFirst(this.path, '');
         List parts = filePath.split("/");
         parts.removeWhere((part) => part.isEmpty);
+        filePath = '/' + parts.join('/');
         if (parts.isNotEmpty) {
           name = Uri.decodeFull(parts.last);
         }
