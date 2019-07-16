@@ -1,3 +1,5 @@
+import 'http_date_time.dart';
+
 class FileInfo {
   final String name;
   final String path;
@@ -7,6 +9,7 @@ class FileInfo {
   final String cTime;
   final String contentType;
   final String eTag;
+  DateTime _dateTime;
 
   FileInfo({
     this.name,
@@ -39,6 +42,10 @@ class FileInfo {
     return FileInfo(
       path: "/",
     );
+  }
+
+  DateTime get dateTime {
+    return this._dateTime ?? (this._dateTime = HttpDateTime.tryParse(this.mTime));
   }
 
   bool get isDirectory => this.contentType == null;
